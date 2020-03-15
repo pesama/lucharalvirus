@@ -1,5 +1,5 @@
-import { Construct, Aws, Token, CfnOutput, Lazy, Intrinsic } from '@aws-cdk/core';
-import { CfnUserPool, CfnUserPoolClient, CfnIdentityPool, CfnIdentityPoolRoleAttachment } from '@aws-cdk/aws-cognito';
+import { Construct, Aws, CfnOutput } from '@aws-cdk/core';
+import { CfnIdentityPool, CfnIdentityPoolRoleAttachment, UserPool, UserPoolClient, SignInAliases, VerificationEmailStyle } from '@aws-cdk/aws-cognito';
 import { Role, FederatedPrincipal, PolicyStatement } from '@aws-cdk/aws-iam';
 
 export interface AuthProps {
@@ -49,10 +49,10 @@ export interface AuthPasswordPolicy {
 export class Auth extends Construct {
   
   /** @returns the User Pool */
-  public readonly userPool: CfnUserPool;
+  public readonly userPool: UserPool;
 
   /** @returns the default user pool client */
-  public readonly defaultClient: CfnUserPoolClient;
+  public readonly defaultClient: UserPoolClient;
 
   /** @returns the default role for unauthenticated users */
   public readonly unauthenticatedRole: Role;
@@ -69,42 +69,27 @@ export class Auth extends Construct {
     const awsRegion = Aws.REGION;
     const awsAccountId = Aws.ACCOUNT_ID;
 
-    this.userPool = new CfnUserPool(this, 'Users', {
+    this.userPool = new UserPool(this, 'Users', {
       userPoolName: props && props.userPoolName ? props.userPoolName : undefined,
-      aliasAttributes: ['email'],
-      autoVerifiedAttributes: ['email'],
-      policies: {
-        passwordPolicy: {
-          minimumLength: props && props.passwordPolicy && props.passwordPolicy.minPasswordLength ? props.passwordPolicy.minPasswordLength : 8,
-          requireLowercase: props && props.passwordPolicy && props.passwordPolicy.requireLowercaseChars ? props.passwordPolicy.requireLowercaseChars : true,
-          requireUppercase: props && props.passwordPolicy && props.passwordPolicy.requireUppercaseChars ? props.passwordPolicy.requireUppercaseChars : true,
-          requireNumbers: props && props.passwordPolicy && props.passwordPolicy.requireDigits ? props.passwordPolicy.requireDigits : true,
-          requireSymbols: props && props.passwordPolicy && props.passwordPolicy.requireSymbols ? props.passwordPolicy.requireSymbols : false,
-        }
+      selfSignUpEnabled: true,
+      signInAliases: {
+        email: true,
+        phone: true,
+        preferredUsername: false,
+        username: false
       },
-      schema: [
-        {
-          attributeDataType: 'String',
-          name: 'email',
-          required: true
-        },
-        {
-          attributeDataType: 'String',
-          name: 'phone_number',
-          required: false
-        }
-      ]
+      userVerification: {
+        emailSubject: 'Verifica tu correo en lucharalvirus.com',
+        emailBody: 'Bienvenido a lucharalvirus.com. Confirma tu correo pulsando en el enlace que te incluímos aquí.',
+        emailStyle: VerificationEmailStyle.LINK,
+        smsMessage: 'Tu código de verificación para lucharalvirus.com es {####}'
+      }
     });
 
-    this.defaultClient = new CfnUserPoolClient(this, 'DefaultClient', {
-      clientName: 'default',
+    this.defaultClient = new UserPoolClient(this, 'DefaultClient', {
+      userPoolClientName: 'default',
       generateSecret: false,
-      refreshTokenValidity: 1,
-      writeAttributes: [
-        'email', 
-        'phone_number',
-      ],
-      userPoolId: this.userPool.ref,
+      userPool: this.userPool,
     });
 
     this.identityPool = new CfnIdentityPool(this, 'Identities', {
@@ -112,8 +97,8 @@ export class Auth extends Construct {
       allowUnauthenticatedIdentities: true,
       cognitoIdentityProviders: [
         {
-          clientId: this.defaultClient.ref,
-          providerName: this.userPool.attrProviderName,
+          clientId: this.defaultClient.userPoolClientId,
+          providerName: this.userPool.userPoolProviderName,
         }
       ]
     });
@@ -158,8 +143,8 @@ export class Auth extends Construct {
       // }
     });
 
-    new CfnOutput(scope, 'AuthUserPoolId', { value: this.userPool.ref });
-    new CfnOutput(scope, 'AuthUserPoolClientId', { value: this.defaultClient.ref });
+    new CfnOutput(scope, 'AuthUserPoolId', { value: this.userPool.userPoolId });
+    new CfnOutput(scope, 'AuthUserPoolClientId', { value: this.defaultClient.userPoolClientId });
     new CfnOutput(scope, 'AuthIdentityPoolId', { value: this.identityPool.ref });
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="form infection-control">
-    Formulario aqui (Oficial)
+    <i>Estamos trabajando en un formulario que te ayude a reportar tus síntomas de forma períodica, para gestionar tu evolución</i>
   </div>
 </template>
 

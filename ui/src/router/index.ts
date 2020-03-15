@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 
 import Home from '@/views/Home.vue'
 import Registration from '../views/Registration.vue';
+import Dashboard from '../views/Dashboard.vue';
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,14 @@ const routes = [
     component: Registration,
     meta: {
       public: true
+    }
+  },
+  {
+    path: '/dashboard/:persona',
+    name: 'dashboard',
+    component: Dashboard,
+    meta: {
+      public: false
     }
   }
 ]

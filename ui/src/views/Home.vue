@@ -36,10 +36,18 @@
           </div>
         </el-col>
         <el-col :xs="24" :sm="12" :md="8">
-          <div class="feedback">
-            <h2 v-html="$t('home.feedback.title')" />
-            <p v-html="$t('home.feedback.description')" />
-            <feedback-form />
+          <div class="phone-assistance">
+            <h2 v-html="$t('home.phone.title')" />
+            <p v-html="$t('home.phone.description')" />
+            <div class="phone placeholder" v-if="!showPhone">
+              <el-button @click="showPhone = true">Obtener teléfono</el-button>
+            </div>
+            <div class="phone" v-else>
+              <a href="tel:123456">
+                123 456 789
+                <i class="fas fa-phone"></i>
+              </a>
+            </div>
           </div>
         </el-col>
       </el-row>
@@ -71,6 +79,8 @@ import FeedbackForm from '../components/FeedbackForm.vue';
   }
 })
 export default class Home extends Vue {
+
+  public showPhone = false;
 
   get helpTopics () {
     return this.$t('home.help.topics');
@@ -126,6 +136,17 @@ export default class Home extends Vue {
 
     button: {
       width: 100%;
+    }
+  }
+
+  .phone {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .5em;
+
+    &:not(.placeholder) {
+      font-size: 2em;
     }
   }
 }

@@ -1,5 +1,31 @@
 export default {
   disclaimer: 'Por favor, utiliza esta herramienta de forma responsable. En estos tiempos de crisis cada minuto cuenta, y debemos minimizar el tiempo que malgastemos. Cada registro, comentario, o acción falsa nos lleva tiempo y esfuerzo, y pone en potencial riesgo a los demás. Si no te tomas en serio esta herramienta podremos tomar acciones legales.',
+  loadingText: 'Tu cuenta está lista! Te estamos dirigiendo a la aplicación',
+  headers: {
+    signUp: 'Crea tu cuenta',
+    confirmSignUp: 'Introduce el código que te hemos enviado'
+  },
+  form: {
+    title: 'Necesitamos algunos datos',
+    description: 'Por favor, rellena estos campos para que podamos entender mejor tu caso. Luego rellena los campos de la derecha para crear tu cuenta.'
+  },
+  fields: {
+    name: {
+      label: 'Tu nombre'
+    },
+    email: {
+      label: 'Tu correo electrónico'
+    },
+    phoneNumber: {
+      label: 'Tu teléfono'
+    },
+    address: {
+      label: 'Tu Ciudad'
+    },
+    password: {
+      label: 'Elige una contraseña'
+    }
+  },
   risk: {
     title: 'Registro como grupo de riesgo',
     description: 'Utiliza este formulario para registrarte como miembro de un grupo de riesgo. Intentaremos darte acceso a utilidades y herramientas para facilitar tu aislamiento, y seguiremos tu estado para saber que estás bien.',

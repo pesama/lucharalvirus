@@ -1,1 +1,1 @@
-export default { "AWS_ACCOUNT_ID": "", "AWS_REGION": "", "USER_POOL_ID": "", "USER_POOL_CLIENT_ID": "", "IDENTITY_POOL_ID": "", "PROFILES_TABLE_NAME": "" }
+export default { "AWS_ACCOUNT_ID": "826885071830", "AWS_REGION": "eu-west-1", "USER_POOL_ID": "eu-west-1_0VK8Bq4Ni", "USER_POOL_CLIENT_ID": "78s2ak85dg9s67kashos7jm1qr", "IDENTITY_POOL_ID": "eu-west-1:6f9979d8-27f0-4393-b2b1-be086ef9051e", "PROFILES_TABLE_NAME": "" }

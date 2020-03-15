@@ -10,13 +10,6 @@
         :hint="$t('components.address.form.street.hint')"
         v-model="street" />
 
-      <!-- City -->
-      <form-field
-        :label="$t('components.address.form.city.label')"
-        :placeholder="$t('components.address.form.city.placeholder')"
-        :hint="$t('components.address.form.city.hint')"
-        v-model="city" />
-
       <!-- Postal code -->
       <form-field
         :label="$t('components.address.form.postalCode.label')"

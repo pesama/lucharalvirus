@@ -10,9 +10,9 @@ stack_description=$(aws cloudformation describe-stacks --stack-name ${STACK_NAME
 
 export aws_account_id=$(echo $stack_description | jq -r '.Stacks[0].Outputs[] | select(.OutputKey == "AwsAccountId") | .OutputValue')
 export aws_region=$(echo $stack_description | jq -r '.Stacks[0].Outputs[] | select(.OutputKey == "AwsRegion") | .OutputValue')
-export user_pool_id=$(echo $stack_description | jq -r '.Stacks[0].Outputs[] | select(.OutputKey == "SimpleAuthUserPoolId") | .OutputValue')
-export user_pool_client_id=$(echo $stack_description | jq -r '.Stacks[0].Outputs[] | select(.OutputKey == "SimpleAuthUserPoolClientId") | .OutputValue')
-export identity_pool_id=$(echo $stack_description | jq -r '.Stacks[0].Outputs[] | select(.OutputKey == "SimpleAuthIdentityPoolId") | .OutputValue')
+export user_pool_id=$(echo $stack_description | jq -r '.Stacks[0].Outputs[] | select(.OutputKey == "AuthUserPoolId") | .OutputValue')
+export user_pool_client_id=$(echo $stack_description | jq -r '.Stacks[0].Outputs[] | select(.OutputKey == "AuthUserPoolClientId") | .OutputValue')
+export identity_pool_id=$(echo $stack_description | jq -r '.Stacks[0].Outputs[] | select(.OutputKey == "AuthIdentityPoolId") | .OutputValue')
 export patients_table_name=$(echo $stack_description | jq -r '.Stacks[0].Outputs[] | select(.OutputKey == "PortfoliosTableName") | .OutputValue')
 export samples_table_name=$(echo $stack_description | jq -r '.Stacks[0].Outputs[] | select(.OutputKey == "AssetsTableName") | .OutputValue')
 export website_bucket_name=$(echo $stack_description | jq -r '.Stacks[0].Outputs[] | select(.OutputKey == "WebUIBucketName") | .OutputValue')

@@ -1,25 +1,10 @@
 <template>
   <div class="volunteer-persona registration">
-
-    <!-- Name -->
-    <form-field 
-      :label="$t('registration.volunteer.form.name.label')"
-      :placeholder="$t('registration.volunteer.form.name.placeholder')"
-      :hint="$t('registration.volunteer.form.name.hint')"
-      v-model="profileData.Name" />
-
-      <!-- PhoneNumber -->
-    <form-field 
-      :label="$t('registration.volunteer.form.phone.label')"
-      :placeholder="$t('registration.volunteer.form.phone.placeholder')"
-      :hint="$t('registration.volunteer.form.phone.hint')"
-      v-model="profileData.PhoneNumber" />
-
     <!-- Address -->
     <address-form-field 
         :title="$t('registration.volunteer.form.address.title')"
         :description="$t('registration.volunteer.form.address.description')"
-        v-model="profileData.Address" />
+        v-model="value.Address" />
 
     <div class="acknowledgments">
       <div class="banner">
@@ -28,23 +13,20 @@
       </div>
       <div class="content">
         <el-checkbox 
-          v-for="(ack, index) in profileData.Acknowledgements"
+          v-for="(ack, index) in value.Acknowledgements"
           :key="index" 
-          v-model="profileData.Acknowledgements[index]">
+          v-model="value.Acknowledgements[index]">
           {{ $t(`medical.volunteerProfile.autoAck.${index}`) }}
         </el-checkbox>
       </div>
-    </div>
-    <div class="actions">
-      <el-button type="primary">{{ $t('common.actions.startRegistration.title') }}</el-button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Watch, Prop } from 'vue-property-decorator'
 import { VolunteerPersonaRegistration } from '../model/VolunteerPersonaRegistration';
-import { RiskProfileAssessment } from '../model/Enumerations';
+import { RiskProfileAssessment, AppPersona } from '../model/Enumerations';
 import FormField from './FormField.vue';
 import AddressFormField from './AddressFormField.vue';
 
@@ -55,21 +37,7 @@ import AddressFormField from './AddressFormField.vue';
   }
 })
 export default class VolunteerPersonaRegistrationComponent extends Vue {
-
-  public profileData: VolunteerPersonaRegistration = {
-    Acknowledgements: Object.values(RiskProfileAssessment).map(k => ({ [k]: false })).reduce((t, i) => ({ ...t, ...i }), {}),
-    Name: '',
-    PhoneNumber: '',
-    Address: {
-      Street: '',
-      City: '',
-      PostalCode: ''
-    }
-  }
-
-  async created () {}
-
-  async mounted () {}
+  @Prop(Object) readonly value!: VolunteerPersonaRegistration;
 }
 </script>
 

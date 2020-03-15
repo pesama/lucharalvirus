@@ -2,7 +2,7 @@ import { Auth } from './auth';
 import { Table, AttributeType, BillingMode } from '@aws-cdk/aws-dynamodb';
 import { Bucket } from '@aws-cdk/aws-s3';
 import { WebUI } from './webui';
-import { StackProps, Stack, Construct, CfnOutput } from '@aws-cdk/core';
+import { StackProps, Stack, Construct, CfnOutput, Aws } from '@aws-cdk/core';
 import RecordSets from './recordsets';
 import { PolicyStatement } from '@aws-cdk/aws-iam';
 
@@ -44,6 +44,9 @@ export class InfraStack extends Stack {
 
   constructor(scope: Construct, id: string, props: MainProps) {
     super(scope, id, props);
+
+    new CfnOutput(this, 'AwsAccountId', { value: Aws.ACCOUNT_ID });
+    new CfnOutput(this, 'AwsRegion', { value: Aws.REGION });
 
     this.authModule = new Auth(this, 'AuthModule');
 

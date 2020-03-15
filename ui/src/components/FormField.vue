@@ -1,7 +1,7 @@
 <template>
   <div class="form-field">
     <label class="form-label" v-html="label" />
-    <el-input :placeholder="placeholder" v-model="value" @input="$emit('input', $event.target.value)" />
+    <el-input :placeholder="placeholder" v-model="fieldValue" />
     <div class="hint" v-html="hint"></div>
   </div>
 </template>
@@ -14,7 +14,15 @@ export default class FormField extends Vue {
   @Prop(String) readonly label: string;
   @Prop(String) readonly placeholder: string;
   @Prop(String) readonly hint: string;
-  @Prop(Object) readonly value: any;
+  @Prop(String) readonly value: any;
+
+  get fieldValue () {
+    return this.value
+  }
+
+  set fieldValue (value: string) {
+    this.$emit('input', value);
+  }
 
   async created () {}
 

@@ -7,21 +7,19 @@
       </router-link>
       <el-container>
         <el-main>
-          <div class="route-wrapper">
+          <div class="route-wrapper" v-if="status === 'idle' || $route.meta.public">
             <router-view />
           </div>
         </el-main>
       </el-container>
     </div>
     <div class="auth" v-if="status === 'unauth' && !$route.meta.public">
-      <div class="info">
-        <div class="logo">
-          <img src="/logo-w-text.png" width="30%" />
-        </div>
-        <p>TODO </p>
-      </div>
       <div class="auth-panel">
-        <amplify-authenticator />
+        <div class="welcome">
+          <h1 class="title" v-html="$t('login.welcome.title')" />
+          <p class="description" v-html="$t('login.welcome.description')" />
+        </div>
+        <amplify-authenticator v-bind:authConfig="authConfig" />
       </div>
     </div>
   </div>
@@ -43,8 +41,19 @@ export default class App extends Vue {
   private readonly fwk: FrameworkService = FrameworkService.getInstance();
   private dataUpdateSchedule = null;
 
-  get status () {
-    return 'unauth';
+  public status = 'unauth';
+
+  get authConfig () {
+    return {
+      usernameAttributes: this.$t('registration.fields.phoneNumber.label'),
+      signInConfig: {
+        header: this.$t('login.form.title')
+      },
+      confirmSignUpConfig: {
+        header: this.$t('registration.headers.confirmSignUp')
+      },
+      
+    }
   }
 
   async created () {
@@ -65,9 +74,10 @@ export default class App extends Vue {
   
   async verifyAuth (): Promise<void> {
     try {
-      const loggedIn = await Amplify.Auth.currentUserCredentials();
+      const credentials = await Amplify.Auth.currentUserCredentials();
+      const loggedIn = !credentials.expired && credentials.authenticated;
       if (loggedIn) {
-        // TODO
+        this.status = 'idle'
       } else {
         // Stop app
       }
@@ -140,6 +150,17 @@ body {
       display: flex;
       justify-content: center;
       align-items: center;
+
+      .welcome {
+        max-width: 400px;
+      }
+
+      /deep/ {
+        .Form__formSection___3tqxz {
+          box-shadow: none !important;
+          border-radius: 0 !important;
+        }
+      }
     }
   }
 
