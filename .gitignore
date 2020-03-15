@@ -1,0 +1,6 @@
+secrets/*
+**/.DS_Store
+**/node_modules
+
+*.js
+*.d.ts
