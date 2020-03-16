@@ -1,27 +1,32 @@
 <template>
   <div class="form-field">
     <label class="form-label" v-html="label" />
-    <el-input :type="fieldType" :placeholder="placeholder" v-model="fieldValue" />
+    <el-input-number class="el-input"
+      :min="min"
+      :max="max"
+      :step="step"
+      :placeholder="placeholder" v-model="numberValue" />
     <div class="hint" v-html="hint"></div>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
+import FormField from './FormField.vue';
 
 @Component
-export default class FormField extends Vue {
-  @Prop(String) readonly label: string;
-  @Prop(String) readonly placeholder: string;
-  @Prop(String) readonly hint: string;
-  @Prop() readonly value: any;
-  @Prop({ required: false, default: 'text' }) readonly fieldType?: string;
+export default class NumberField extends FormField {
+  @Prop(Number) readonly min?: number;
+  @Prop(Number) readonly max?: number;
+  @Prop(Number) readonly step?: number;
+  @Prop(Number) readonly value: number;
 
-  get fieldValue () {
+
+  get numberValue () {
     return this.value
   }
 
-  set fieldValue (value: any) {
+  set numberValue (value: number) {
     this.$emit('input', value);
   }
 

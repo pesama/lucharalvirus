@@ -28,6 +28,16 @@ export class InfraStack extends Stack {
   public readonly profilesTable: Table;
 
   /**
+   * Stores samples of affected users, for condition monitoring.
+   */
+  public readonly samplingTable: Table;
+
+  /**
+   * Stores assistance requests by customers in risk profiles
+   */
+  public readonly assistanceTable: Table;
+
+  /**
    * Bucket holding patients data
    */
   public readonly profilesBucket: Bucket;
@@ -50,17 +60,53 @@ export class InfraStack extends Stack {
 
     this.authModule = new Auth(this, 'AuthModule');
 
-    // Define patients table
+    // Define profiles table
     this.profilesTable = new Table(this, 'PatientsTable', {
       billingMode: BillingMode.PAY_PER_REQUEST,
       partitionKey: {
         name: 'ProfileId',
         type: AttributeType.STRING
       },
+      sortKey: {
+        name: 'CreationDate',
+        type: AttributeType.STRING
+      },
       serverSideEncryption: true
     });
 
     new CfnOutput(this, 'ProfilesTableName', { value: this.profilesTable.tableName });
+
+    // Define patients table
+    this.assistanceTable = new Table(this, 'AssistanceTable', {
+      billingMode: BillingMode.PAY_PER_REQUEST,
+      partitionKey: {
+        name: 'UserId',
+        type: AttributeType.STRING
+      },
+      sortKey: {
+        name: 'CreationDate',
+        type: AttributeType.STRING
+      },
+      serverSideEncryption: true
+    });
+
+    new CfnOutput(this, 'AssistanceTableName', { value: this.assistanceTable.tableName });
+
+    // Define sampling table
+    this.samplingTable = new Table(this, 'SamplingTable', {
+      billingMode: BillingMode.PAY_PER_REQUEST,
+      partitionKey: {
+        name: 'UserId',
+        type: AttributeType.STRING
+      },
+      sortKey: {
+        name: 'CreationDate',
+        type: AttributeType.STRING
+      },
+      serverSideEncryption: true
+    });
+
+    new CfnOutput(this, 'SamplingTableName', { value: this.samplingTable.tableName });
 
     // Define data bucket
     this.profilesBucket = new Bucket(this, 'DataBucket');
@@ -81,13 +127,70 @@ export class InfraStack extends Stack {
     });
 
     // Authorize everyone to register
-    this.authModule.unauthenticatedRole.addToPolicy(new PolicyStatement({
+    this.authModule.authenticatedRole.addToPolicy(new PolicyStatement({
       actions: [
-        'dynamodb:PutItem'
+        'dynamodb:GetItem',
+        'dynamodb:PutItem',
+        'dynamodb:Query'
       ],
       resources: [
         this.profilesTable.tableArn
+      ],
+      conditions: {
+        'ForAllValues:StringEquals': {
+          'dynamodb:LeadingKeys': [
+            '${cognito-identity.amazonaws.com:sub}'
+          ]
+        }
+      }
+    }));
+
+    // Authorize users to request assistance
+    this.authModule.authenticatedRole.addToPolicy(new PolicyStatement({
+      actions: [
+        'dynamodb:GetItem',
+        'dynamodb:PutItem',
+        'dynamodb:Query'
+      ],
+      resources: [
+        this.assistanceTable.tableArn
+      ],
+      conditions: {
+        'ForAllValues:StringEquals': {
+          'dynamodb:LeadingKeys': [
+            '${cognito-identity.amazonaws.com:sub}'
+          ]
+        }
+      }
+    }));
+
+    // Authorize users to request assistance
+    this.authModule.authenticatedRole.addToPolicy(new PolicyStatement({
+      actions: [
+        'dynamodb:Scan',
+      ],
+      resources: [
+        this.assistanceTable.tableArn
       ]
+    }));
+
+    // Authorize users to provide samples
+    this.authModule.authenticatedRole.addToPolicy(new PolicyStatement({
+      actions: [
+        'dynamodb:GetItem',
+        'dynamodb:PutItem',
+        'dynamodb:Query'
+      ],
+      resources: [
+        this.samplingTable.tableArn
+      ],
+      conditions: {
+        'ForAllValues:StringEquals': {
+          'dynamodb:LeadingKeys': [
+            '${cognito-identity.amazonaws.com:sub}'
+          ]
+        }
+      }
     }));
   }
 }

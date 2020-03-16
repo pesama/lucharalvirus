@@ -1,5 +1,6 @@
 <template>
   <div class="registration risk-persona">
+    <h2 class="title" v-html="$t('registration.patient.form.title')" />
     <form class="registration-form">
       <div class="details">
         <!-- Condition summary -->
@@ -7,14 +8,16 @@
           :label="$t('registration.patient.form.condition.label')"
           :placeholder="$t('registration.patient.form.condition.placeholder')"
           :hint="$t('registration.patient.form.condition.hint')"
-          v-model="value.Condition" />
+          v-model="value.Condition"
+          :required="true" />
 
         <!-- Specialist request summary -->
         <form-field 
           :label="$t('registration.patient.form.specialist.label')"
           :placeholder="$t('registration.patient.form.specialist.placeholder')"
           :hint="$t('registration.patient.form.specialist.hint')"
-          v-model="value.Specialist" />
+          v-model="value.Specialist"
+          :required="true" />
       </div>
     </form>
   </div>
@@ -44,9 +47,7 @@ export default class PatientPersonaRegistrationComponent extends Vue {
 <style lang="scss" scoped>
 .risk-persona {
 
-  .actions {
-    text-align: right;
-  }
+  
 }
 
 </style>

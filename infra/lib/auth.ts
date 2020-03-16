@@ -79,9 +79,9 @@ export class Auth extends Construct {
         username: false
       },
       userVerification: {
-        emailSubject: 'Verifica tu correo en lucharalvirus.com',
-        emailBody: 'Bienvenido a lucharalvirus.com. Confirma tu correo pulsando en el enlace que te incluímos aquí.',
-        emailStyle: VerificationEmailStyle.LINK,
+        // emailSubject: 'Verifica tu correo en lucharalvirus.com',
+        // emailBody: 'Bienvenido a lucharalvirus.com. Confirma tu correo pulsando en el enlace que te incluímos aquí.',
+        // emailStyle: VerificationEmailStyle.LINK,
         smsMessage: 'Tu código de verificación para lucharalvirus.com es {####}'
       }
     });

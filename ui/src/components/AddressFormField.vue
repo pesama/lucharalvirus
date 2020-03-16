@@ -1,22 +1,12 @@
 <template>
   <div class="address-form-field form-field">
     <div class="title" v-html="title" />
+    <place-autocomplete-field 
+      v-model="formValue"  
+      name="address" 
+      api-key="AIzaSyAhSv9zWvisiTXRPRw6K8AE0DCmrRMpQcU"
+      v-place-autofill.country="'Spain'" />
     <div class="description" v-html="description" />
-    <div class="fields">
-      <!-- Street -->
-      <form-field
-        :label="$t('components.address.form.street.label')"
-        :placeholder="$t('components.address.form.street.placeholder')"
-        :hint="$t('components.address.form.street.hint')"
-        v-model="street" />
-
-      <!-- Postal code -->
-      <form-field
-        :label="$t('components.address.form.postalCode.label')"
-        :placeholder="$t('components.address.form.postalCode.placeholder')"
-        :hint="$t('components.address.form.postalCode.hint')"
-        v-model="postalCode" />
-    </div>
 
   </div>
 </template>
@@ -34,45 +24,19 @@ import { Address } from '../model/CommonFields';
 export default class AddressFormField extends Vue {
   @Prop(String) readonly title!: string;
   @Prop(String) readonly description!: string;
-  @Prop(Object) readonly value!: Address;
-
-  public copy?: Address;
-
-  get street () {
-    return this.value.Street;
+  @Prop(String) readonly value!: string;
+  
+  get formValue () {
+    return this.value;
   }
 
-  set street (data: string) {
-    this.copy.Street = data;
-    this.$emit('input', this.copy!);
-  }
-
-  get city () {
-    return this.value.City;
-  }
-
-  set city (data: string) {
-    this.copy.City = data;
-    this.$emit('input', this.copy!);
-  }
-
-  get postalCode () {
-    return this.value.PostalCode;
-  }
-
-  set postalCode (data: string) {
-    this.copy.PostalCode = data;
-    this.$emit('input', this.copy!);
+  set formValue (value: any) {
+    this.$emit('input', value);
   }
 
   async created () {}
 
   async mounted () {}
-
-  @Watch('value', { immediate: true })
-  onValueChanged (val?: Address) {
-    this.copy = val;
-  }
 }
 </script>
 
@@ -88,6 +52,32 @@ export default class AddressFormField extends Vue {
   .description {
     font-size: .9em;
     color: $color-muted;
+  }
+
+  /deep/ {
+    .form-group {
+      label {
+        display: none;
+      }
+
+      input {
+        -webkit-appearance: none;
+        background-color: #FFF;
+        background-image: none;
+        border-radius: 4px;
+        border: 1px solid #DCDFE6;
+        box-sizing: border-box;
+        color: #606266;
+        display: inline-block;
+        font-size: inherit;
+        height: 40px;
+        line-height: 40px;
+        outline: 0;
+        padding: 0 15px;
+        transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+        width: 100%;
+      }
+    }
   }
 }
 

@@ -1,6 +1,8 @@
 export default {
   disclaimer: 'Por favor, utiliza esta herramienta de forma responsable. En estos tiempos de crisis cada minuto cuenta, y debemos minimizar el tiempo que malgastemos. Cada registro, comentario, o acción falsa nos lleva tiempo y esfuerzo, y pone en potencial riesgo a los demás. Si no te tomas en serio esta herramienta podremos tomar acciones legales.',
   loadingText: 'Tu cuenta está lista! Te estamos dirigiendo a la aplicación',
+  success: 'Hemos guardado los datos correctamente',
+  error: 'Ha habido un error cuando intentábamos guardar los datos.',
   headers: {
     signUp: 'Crea tu cuenta',
     confirmSignUp: 'Introduce el código que te hemos enviado'
@@ -26,10 +28,23 @@ export default {
       label: 'Elige una contraseña'
     }
   },
+  affected: {
+    title: 'Registro de posibles afectados',
+    description: 'Utiliza el formulario de la derecha para registrarte. Una vez hayas confirmado tu cuenta, te facilitaremos un sistema para que puedas reportar tus síntomas períodicamente, para llevar un mejor control de tu evolución. Es posible que un médico te llame para saber cómo te encuentras.',
+    form: {
+      submit: 'Actualizar mi perfil',
+      riskAssessment: {
+        label: 'Estás en un grupo de riesgo?',
+        placeholder: 'Selecciona las opciones que se adapten a ti',
+        hint: 'Estas opciones nos ayudan a evaluar mejor tu perfil.'
+      }
+    }
+  },
   risk: {
     title: 'Registro como grupo de riesgo',
     description: 'Utiliza este formulario para registrarte como miembro de un grupo de riesgo. Intentaremos darte acceso a utilidades y herramientas para facilitar tu aislamiento, y seguiremos tu estado para saber que estás bien.',
     form: {
+      submit: 'Guardar',
       reason: {
         label: 'Motivo del riesgo',
         placeholder: 'Dinos por qué estás en el grupo de riesgo',
@@ -58,6 +73,7 @@ export default {
     title: 'Registro como voluntario',
     description: 'Los voluntarios sois la pieza vital de esta aplicación, y sin vosotros, nada funcionaría. Muchas gracias por ofrecer tu tiempo para esta labor social.',
     form: {
+      submit: 'Date de alta como voluntario',
       name: {
         label: 'Tu nombre',
         placeholder: 'Escribe tu nombre aquí',
@@ -82,6 +98,8 @@ export default {
     title: 'Registro como paciente',
     description: 'Las personas que no os veáis afectadas por una condición médica urgente, no deberéis acudir a un centro sanitario. Regístrate como paciente y te pondremos en contacto con médicos disponibles, para que podáis hablar a distancia de vuestra condición.',
     form: {
+      title: 'Reporta una condición médica',
+      submit: 'Reportar condición',
       name: {
         label: 'Tu nombre',
         placeholder: 'Escribe tu nombre aquí',

@@ -3,7 +3,18 @@ export default {
   summaryParagraph: 'En estos momentos difíciles, nuestros servicios sanitarios necesitan nuestra ayuda y coherencia para que esta situación que estamos viviendo pase pronto, y con las menores víctimas posibles. Hemos creado <i>lucharalvirus.com</i> para que todos los ciudadanos podáis reportar si sospecháis que podéis tener el <b>coronavirus</b>, podáis <b>pedir ayuda si sois parte de colectivos de riesgo</b>, y solicitar asistencia médica para casos no urgentes, de forma remota.',
   infected: {
     title: 'Crees que puedes tener el virus?',
-    description: 'Como sabes, este virus puede afectarnos a cualquiera. Si observas que tienes <b>fiebre</b>, <b>tos</b> o <b>disnea</b> - dificultad para respirar - es posible que estés afectado. Rellena el formulario con tus datos, y empezaremos a controlar cómo evolucionas - te enviaremos notificaciones para recordártelo. Tus datos se facilitarán a los equipos sanitarios, para que puedan realizar tu seguimiento de forma más efectiva.', 
+    description: 'Este virus puede afectarnos a cualquiera. Si observas que tienes <b>fiebre</b>, <b>tos</b> o <b>dificultad para respirar</b>, es posible que estés afectado.', 
+    register: 'Empieza el seguimiento',
+    form: {
+      symptoms: {
+        label: 'Síntomas',
+        placeholder: 'Qué síntomas presentas?'
+      },
+      birthDate: {
+        label: 'Fecha de nacimiento',
+        hint: 'Indícanos tu fecha de nacimiento para conocer tu perfil de riesgo'
+      }
+    }
   },
   assistance: {
     title: 'Estás en un grupo de riesgo, y necesitas ayuda?',
@@ -24,7 +35,7 @@ export default {
   },
   medical: {
     title: 'Asistencia médica',
-    description: 'Para aliviar a los sistemas sanitarios de recibir demasiadas visitas en los centros, hemos preparado este sistema, para permitirte ponerte en contacto con médicos o especialistas de forma no virtual, si tu condición no es urgente. <br /><br /> Si eres médico o especialista sanitario, y no puedes trabajar presencialmente por cualquier motivo, regístrate como médico y ofrece tu ayuda.',
+    description: 'Para aliviar a los sistemas sanitarios de recibir demasiadas visitas en los centros, hemos preparado este sistema, para permitirte ponerte en contacto con médicos o especialistas de forma virtual, si tu condición no es urgente. <br /><br /> Si eres médico o especialista sanitario, y no puedes trabajar presencialmente por cualquier motivo, regístrate como médico y ofrece tu ayuda.',
     actions: {
       registerDoctor: 'Registrarse como médico',
       registerPatient: 'Registrarse como paciente'
@@ -57,7 +68,7 @@ export default {
   },
   help: {
     title: 'Ayúdanos a mejorar!',
-    description: 'Tienes ganas de ayudar a mejorar esta aplicación, para ayudar al mayor número de gente posible? Echa un vistazo aquí, hemos publicado todas nuestras tareas pendientes. Si encuentras algo de lo que crees que puedes encargarte, escríbenos a <a href="mailto:colabora@lucharalvirus.com">colabora@lucharalvirus.com</a> y nos pondremos en contacto para colaborar enseguida. Hemos publicado toda la aplicación en <a href="https://github.com/pesama/lucharalvirus">GitHub</a>, para que puedas ver en todo momento cómo vamos, y qué estamos haciendo',
+    description: 'Tienes ganas de ayudar a mejorar esta aplicación, para ayudar al mayor número de gente posible? Echa un vistazo aquí, hemos publicado todas nuestras tareas pendientes. Si encuentras algo de lo que crees que puedes encargarte, escríbenos a <a href="mailto:contacto@lucharalvirus.com">contacto@lucharalvirus.com</a> y nos pondremos en contacto para colaborar enseguida. Hemos publicado toda la aplicación en <a href="https://github.com/pesama/lucharalvirus">GitHub</a>, para que puedas ver en todo momento cómo vamos, y qué estamos haciendo',
     topics: [
       {
         title: 'Difusión del mensaje',

@@ -12,12 +12,14 @@
         <div class="description" v-html="$t('registration.volunteer.form.acknowledgments.description')" />
       </div>
       <div class="content">
-        <el-checkbox 
+        <div class="check" 
           v-for="(ack, index) in value.Acknowledgements"
-          :key="index" 
-          v-model="value.Acknowledgements[index]">
-          {{ $t(`medical.volunteerProfile.autoAck.${index}`) }}
-        </el-checkbox>
+          :key="index">
+          <el-checkbox 
+            v-model="value.Acknowledgements[index]">
+            {{ $t(`medical.volunteerProfile.autoAck.${index}`) }}
+          </el-checkbox>
+        </div>
       </div>
     </div>
   </div>
@@ -61,9 +63,8 @@ export default class VolunteerPersonaRegistrationComponent extends Vue {
     }
   }
 
-  .actions {
-    margin: .5em 0;
-    text-align: right;
+  .content {
+    margin-bottom: 1em;
   }
 }
 

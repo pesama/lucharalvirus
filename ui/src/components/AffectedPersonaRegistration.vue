@@ -1,15 +1,16 @@
 <template>
-  <div class="registration risk-persona">
+  <div class="registration affected-persona">
     <form class="registration-form">
       <div class="reason">
         <!-- Reason for risk profile -->
         <select-field 
-          :label="$t('registration.risk.form.reason.label')"
-          :placeholder="$t('registration.risk.form.reason.placeholder')"
-          :hint="$t('registration.risk.form.reason.hint')"
+          :label="$t('registration.affected.form.riskAssessment.label')"
+          :placeholder="$t('registration.affected.form.riskAssessment.placeholder')"
+          :hint="$t('registration.affected.form.riskAssessment.hint')"
           :options="riskProfileAssessmentOptions"
           :multiple="true"
           v-model="value.Reasons" />
+        
         <!-- Address -->
         <address-form-field 
             :title="$t('registration.risk.form.address.title')"
@@ -35,7 +36,7 @@ import { RiskPersonaRegistration } from '../model/RiskPersonaRegistration';
     SelectField
   }
 })
-export default class RiskPersonaRegistrationComponent extends Vue {
+export default class AffectedPersonaRegistrationComponent extends Vue {
   @Prop(Object) readonly value!: RiskPersonaRegistration;
 
   get riskProfileAssessmentOptions () {
@@ -49,11 +50,8 @@ export default class RiskPersonaRegistrationComponent extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-.risk-persona {
+.affected-persona {
 
-  .actions {
-    text-align: right;
-  }
 }
 
 </style>

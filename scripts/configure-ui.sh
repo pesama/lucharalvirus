@@ -14,7 +14,9 @@ config="export default { \
   \"USER_POOL_ID\": \"${user_pool_id}\", \
   \"USER_POOL_CLIENT_ID\": \"${user_pool_client_id}\", \
   \"IDENTITY_POOL_ID\": \"${identity_pool_id}\", \
-  \"PROFILES_TABLE_NAME\": \"${portfolio_service_api_endpoint}\" \
+  \"PROFILES_TABLE_NAME\": \"${profiles_table_name}\", \
+  \"ASSISTANCE_TABLE_NAME\": \"${assistance_table_name}\", \
+  \"SAMPLING_TABLE_NAME\": \"${sampling_table_name}\" \
 }"
 
 echo "INFO: Writing Typescript configuration"

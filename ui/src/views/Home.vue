@@ -4,13 +4,18 @@
       <h1 v-html="$t('home.title')"></h1>
       <p v-html="$t('home.summaryParagraph')"></p>
     </div>
-    <div class="affected-tracking">
-      <h2 v-html="$t('home.infected.title')"></h2>
-      <p v-html="$t('home.infected.description')"></p>
-      <infection-control-form />
-    </div>
     <div class="content tools">
       <el-row :gutter="20">
+        <el-col :xs="24" :sm="12" :md="8">
+          <div class="affected-tracking">
+            <h2 v-html="$t('home.infected.title')"></h2>
+            <p v-html="$t('home.infected.description')"></p>
+            <infection-control-form />
+            <el-button type="warning" @click="startAffectedPersonaRegistration()">
+              {{ $t('home.infected.register') }}
+            </el-button>
+          </div>
+        </el-col>
         <el-col :xs="24" :sm="12" :md="8">
           <div class="risk-assistance">
             <h2 v-html="$t('home.assistance.title')"></h2>
@@ -35,7 +40,7 @@
             </el-button>
           </div>
         </el-col>
-        <el-col :xs="24" :sm="12" :md="8">
+        <!-- <el-col :xs="24" :sm="12" :md="8">
           <div class="phone-assistance">
             <h2 v-html="$t('home.phone.title')" />
             <p v-html="$t('home.phone.description')" />
@@ -49,7 +54,7 @@
               </a>
             </div>
           </div>
-        </el-col>
+        </el-col> -->
       </el-row>
     </div>
     <div class="content help">
@@ -89,6 +94,10 @@ export default class Home extends Vue {
   async created () {}
 
   async mounted () {}
+
+  startAffectedPersonaRegistration () {
+    this.$router.push('/registration/affected');
+  }
 
   startRiskPersonaRegistration () {
     this.$router.push('/registration/risk');

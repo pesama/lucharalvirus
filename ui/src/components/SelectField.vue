@@ -1,7 +1,7 @@
 <template>
   <div class="select-field form-field">
     <label class="form-label" v-html="label" />
-    <el-select class="el-input" :placeholder="placeholder" :multiple="multiple" v-model="value" @input="$emit('input', $event.target.value)">
+    <el-select class="el-input" :placeholder="placeholder" :multiple="multiple" v-model="formValue">
       <el-option v-for="(option, index) in options" :key="index" :value="option.value" v-html="option.label" />
     </el-select>
     <div class="hint" v-html="hint"></div>
@@ -21,7 +21,15 @@ export interface Option {
 export default class SelectField extends FormField {
   @Prop(Boolean) readonly multiple!: boolean;
   @Prop(Array) readonly options!: Option[];
-  @Prop(Object) readonly value!: any;
+  @Prop(Array) readonly value!: any;
+
+  get formValue () {
+    return this.value;
+  }
+
+  set formValue (value: any) {
+    this.$emit('input', value);
+  }
 
   async created () {}
 

@@ -13,7 +13,11 @@ export enum Symptom {
 
 export enum RiskProfileAssessment {
   AGE = 'age',
+  HIPER_TENSION = 'hiperTension',
+  DIABETES = 'diabetes',
   CARDIAC_AFFECTIONS = 'cardiacAffections',
   RESPIRATORY_AFFECTIONS = 'respiratoryAffections',
-  POSSIBLE_INFECTION = 'possibleInfection'
+  CANCER = 'cancer',
+  IMMUNO_DEFICIENCIES = 'immunoDeficiencies',
+  PREGNANCY = 'pregnancy',
 }
