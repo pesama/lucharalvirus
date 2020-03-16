@@ -10,7 +10,7 @@
           <div class="affected-tracking">
             <h2 v-html="$t('home.infected.title')"></h2>
             <p v-html="$t('home.infected.description')"></p>
-            <infection-control-form />
+            <!-- <infection-control-form /> -->
             <el-button type="warning" @click="startAffectedPersonaRegistration()">
               {{ $t('home.infected.register') }}
             </el-button>
@@ -56,6 +56,10 @@
           </div>
         </el-col> -->
       </el-row>
+    </div>
+    <div class="content data-dislaimer">
+      <h2 v-html="$t('home.dataDisclaimer.title')" />
+      <p v-html="$t('home.dataDisclaimer.description')" />
     </div>
     <div class="content help">
       <h2 v-html="$t('home.help.title')" />

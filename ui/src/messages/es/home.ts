@@ -1,6 +1,31 @@
 export default {
   title: 'Ayuda a luchar contra el coronavirus',
   summaryParagraph: 'En estos momentos difíciles, nuestros servicios sanitarios necesitan nuestra ayuda y coherencia para que esta situación que estamos viviendo pase pronto, y con las menores víctimas posibles. Hemos creado <i>lucharalvirus.com</i> para que todos los ciudadanos podáis reportar si sospecháis que podéis tener el <b>coronavirus</b>, podáis <b>pedir ayuda si sois parte de colectivos de riesgo</b>, y solicitar asistencia médica para casos no urgentes, de forma remota.',
+  dataDisclaimer: {
+    title: 'Para qué usamos tus datos?',
+    description: `Durante tu registro te vamos a pedir estos datos: 
+    <ul>
+      <li>
+        <b>Tu nombre</b>: Lo usaremos para dirigirnos a ti.
+      </li>
+      <li>
+        <b>Datos de contacto</b>: Tu correo electrónico, y teléfono móvil. Los necesitamos para ponerte en contacto con los usuarios más relevantes para ti. <b>Nunca les facilitaremos tus datos, si tú no nos dejas</b>. También podremos, en función de tu perfil, ponernos nosotros mismos en contacto contigo - para enviarte alguna notificación o recordatorio.
+      </li>
+      <li>
+        <b>Tu ciudad</b>: Tu ciudad es importante para saber quién es la autoridad competente en tu zona, para poder enviarles tus datos, si estás afectado por el virus. Esto pretende aliviar la tarea de los servicios de emergencia, pudiendo potencialmente ver varios casos leves a la vez.
+      </li>  
+    </ul>
+    <p>
+      Según el perfil que utilices en la aplicación - es decir, <b>si la usas porque estás afectado por el virus, formas parte de un grupo de riesgo, o colaboras como voluntario</b>, te pediremos tu dirección exacta - la calle y el número. Estos datos nos facilitan filtrar el seguimiento de pacientes y las solicitudes de ayuda, para poder mostrarte solo la información más relevante para ti.
+    </p>
+    <p>
+      También en relación con tu perfil, te podremos pedir otros datos - ejemplo, posibles características por las que estás o no incluído en un grupo de riesgo -. Con estos datos evaluaremos el riesgo que supone para ti contribuir como voluntario - si te registras como tal - y se los enviaremos conjuntamente a las autoridades sanitarias para que evalúen vuestro perfil con la mayor precisión.
+    </p>
+    <p>
+      Cuando esta situación finalice, y esta aplicación no haga falta más, todos los datos se borrarán. Si las autoridades nos lo solicitan, les facilitaremos los datos. Pero nadie más verá nunca tu información, ni se utilizará jamás para ningún fin, comercial o no comercial.
+    </p>
+    `
+  },
   infected: {
     title: 'Crees que puedes tener el virus?',
     description: 'Este virus puede afectarnos a cualquiera. Si observas que tienes <b>fiebre</b>, <b>tos</b> o <b>dificultad para respirar</b>, es posible que estés afectado.', 

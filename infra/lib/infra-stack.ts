@@ -90,6 +90,31 @@ export class InfraStack extends Stack {
       serverSideEncryption: true
     });
 
+    // Allow assistance table to be queried by city or PostalCode
+    this.assistanceTable.addGlobalSecondaryIndex({
+      indexName: 'ByCity',
+      partitionKey: {
+        name: 'City',
+        type: AttributeType.STRING
+      },
+      sortKey: {
+        name: 'UniqueKey',
+        type: AttributeType.STRING
+      }
+    });
+
+    this.assistanceTable.addGlobalSecondaryIndex({
+      indexName: 'ByPostalCode',
+      partitionKey: {
+        name: 'PostalCode',
+        type: AttributeType.STRING
+      },
+      sortKey: {
+        name: 'UniqueKey',
+        type: AttributeType.STRING
+      }
+    });
+
     new CfnOutput(this, 'AssistanceTableName', { value: this.assistanceTable.tableName });
 
     // Define sampling table
@@ -164,13 +189,14 @@ export class InfraStack extends Stack {
       }
     }));
 
-    // Authorize users to request assistance
+    // Authorize users to query assistance
     this.authModule.authenticatedRole.addToPolicy(new PolicyStatement({
       actions: [
-        'dynamodb:Scan',
+        'dynamodb:Query',
       ],
       resources: [
-        this.assistanceTable.tableArn
+        `${this.assistanceTable.tableArn}/index/ByCity`,
+        `${this.assistanceTable.tableArn}/index/ByPostalCode`
       ]
     }));
 

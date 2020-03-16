@@ -12,9 +12,21 @@
           v-model="value.Reasons" />
         <!-- Address -->
         <address-form-field 
-            :title="$t('registration.risk.form.address.title')"
-            :description="$t('registration.risk.form.address.description')"
-            v-model="value.Address" />
+          :title="$t('registration.risk.form.address.title')"
+          :description="$t('registration.risk.form.address.description')"
+          v-model="value.Address" />
+
+        <div class="consents">
+          <h4 class="title" v-html="$t('legal.consents.title')" />
+          <div class="check" 
+            v-for="(ack, index) in consents"
+            :key="index">
+            <el-checkbox 
+              v-model="value.Consents[index]">
+              {{ $t(`legal.consents.data.${index}`) }}
+            </el-checkbox>
+          </div>
+        </div>
       </div>
     </form>
   </div>
@@ -38,6 +50,11 @@ import { RiskPersonaRegistration } from '../model/RiskPersonaRegistration';
 export default class RiskPersonaRegistrationComponent extends Vue {
   @Prop(Object) readonly value!: RiskPersonaRegistration;
 
+  get consents () {
+    const consents = this.$t('legal.consents.data');
+    return consents;
+  }
+
   get riskProfileAssessmentOptions () {
     return Object.values(RiskProfileAssessment).map(a => ({
       value: a,
@@ -53,6 +70,19 @@ export default class RiskPersonaRegistrationComponent extends Vue {
 
   .actions {
     text-align: right;
+  }
+
+  margin-bottom: 1em;
+
+  .check {
+    margin: .5em 0;
+  }
+
+  .el-checkbox {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    white-space: normal;
   }
 }
 

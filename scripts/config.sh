@@ -18,3 +18,4 @@ export assistance_table_name=$(echo $stack_description | jq -r '.Stacks[0].Outpu
 export sampling_table_name=$(echo $stack_description | jq -r '.Stacks[0].Outputs[] | select(.OutputKey == "SamplingTableName") | .OutputValue')
 export samples_table_name=$(echo $stack_description | jq -r '.Stacks[0].Outputs[] | select(.OutputKey == "AssetsTableName") | .OutputValue')
 export website_bucket_name=$(echo $stack_description | jq -r '.Stacks[0].Outputs[] | select(.OutputKey == "WebUIBucketName") | .OutputValue')
+export gmaps_api_key="AIzaSyCIh4fDoXFneNegg49mDgiSZvJC9-cs_B0"

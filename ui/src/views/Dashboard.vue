@@ -5,7 +5,10 @@
         <div class="banner" v-if="user">
           <h1 class="title" v-html="$t('dashboard.welcome.title', { user: user.attributes.name })" />
           <div class="subtitle" v-html="$t('dashboard.welcome.subtitle', { role: $t(`common.personas.${role}`) })" />
-          <p v-html="$t(`dashboard.welcome.${role}`)" />
+          <p class="description" v-html="$t(`dashboard.welcome.${role}`)" />
+          <div v-if="role === 'volunteer'">
+            <volunteering-table />
+          </div>
         </div>
       </el-col>
       <el-col :xs="24" :md="12">
@@ -25,12 +28,16 @@
           </div>
         </div>
         <div class="profiles" v-else-if="profiles.length">
-          <div class="data" v-if="role !== 'affected'">
-            <my-profile :profiles="profiles" :user="user" />
-          </div>
-          <div v-else>
+          <div v-if="role === 'affected'">
             <affected-sampling />
           </div>
+          <div class="control" v-else-if="role === 'volunteer'">
+            <volunteers-dashboard />
+          </div> 
+          <div class="data" v-else>
+            <my-profile :profiles="profiles" :user="user" />
+          </div>
+          
         </div>
       </el-col>
     </el-row>
@@ -57,6 +64,8 @@ import MyProfile from '../components/MyProfile.vue';
 import AffectedSampling from '../components/AffectedSampling.vue';
 import AffectedPersonaRegistration from '../components/AffectedPersonaRegistration.vue';
 import AffectedSamplingHistory from '../components/AffectedSamplingHistory.vue';
+import VolunteersDashboard from '../components/VolunteersDashboard.vue';
+import VolunteeringTable from '../components/VolunteeringTable.vue';
 
 export interface UiProfile extends Profile {
   $ready: boolean;
@@ -72,7 +81,9 @@ export interface UiProfile extends Profile {
     ProfilesTable,
     RiskPersonaRegistration,
     VolunteerPersonaRegistration,
-    MyProfile
+    MyProfile,
+    VolunteersDashboard,
+    VolunteeringTable
   }
 })
 export default class Dashboard extends Vue {
@@ -127,7 +138,11 @@ export default class Dashboard extends Vue {
           const riskModel: RiskModel = {
             ...this.newProfile,
             Reasons: [],
-            Address: ''
+            Address: '',
+            Consents: {
+              providePhoneNumberOneToOne: false,
+              provideAddressOneToOne: false
+            }
           };
 
           this.newProfile = {
@@ -180,12 +195,28 @@ export default class Dashboard extends Vue {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss" scoped>
+<style lang="scss">
+@import '@/assets/branding';
+
 .dashboard {
   .actions {
     .el-button {
       width: 100%;
     }
+  }
+
+  .title {
+    margin: 0;
+  }
+
+  .subtitle {
+    font-size: .9em;
+  }
+
+  .description {
+    font-size: .9em;
+    color: $color-muted;
+    margin: 0.5em 0;
   }
 }
 

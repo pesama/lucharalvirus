@@ -16,7 +16,8 @@ config="export default { \
   \"IDENTITY_POOL_ID\": \"${identity_pool_id}\", \
   \"PROFILES_TABLE_NAME\": \"${profiles_table_name}\", \
   \"ASSISTANCE_TABLE_NAME\": \"${assistance_table_name}\", \
-  \"SAMPLING_TABLE_NAME\": \"${sampling_table_name}\" \
+  \"SAMPLING_TABLE_NAME\": \"${sampling_table_name}\", \
+  \"GMAPS_API_KEY\": \"${gmaps_api_key}\", \
 }"
 
 echo "INFO: Writing Typescript configuration"

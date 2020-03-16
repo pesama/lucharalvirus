@@ -2,12 +2,12 @@
   <div class="address-form-field form-field">
     <div class="title" v-html="title" />
     <place-autocomplete-field 
-      v-model="formValue"  
+      v-model="textInput"  
       name="address" 
-      api-key="AIzaSyAhSv9zWvisiTXRPRw6K8AE0DCmrRMpQcU"
-      v-place-autofill.country="'Spain'" />
+      api-key="AIzaSyCIh4fDoXFneNegg49mDgiSZvJC9-cs_B0"
+      v-place-autofill.country="'Spain'"
+      v-on:autocomplete-select="select" />
     <div class="description" v-html="description" />
-
   </div>
 </template>
 
@@ -24,7 +24,9 @@ import { Address } from '../model/CommonFields';
 export default class AddressFormField extends Vue {
   @Prop(String) readonly title!: string;
   @Prop(String) readonly description!: string;
-  @Prop(String) readonly value!: string;
+  @Prop() readonly value!: any;
+
+  public textInput: string = typeof(this.value) === 'string' ? this.value : '';
   
   get formValue () {
     return this.value;
@@ -32,6 +34,28 @@ export default class AddressFormField extends Vue {
 
   set formValue (value: any) {
     this.$emit('input', value);
+  }
+
+  select (place: any, response: any) {
+    const addressComponents = response.address_components
+      .map(i => i.types.map(t => ({ [t]: i })))
+      .flat()
+      .reduce((t, i) => ({ ...t, ...i }), {});
+
+    const parsedAddress = {
+      FormattedText: response.formatted_address,
+      Street: addressComponents.route,
+      Number: addressComponents.street_number,
+      PostalCode: addressComponents.postal_code,
+      Geolocation: {
+        lat: response.geometry.location.lat(),
+        lng: response.geometry.location.lng()
+      }
+    };
+
+    // TODO Verify address components to match accuracy
+    debugger;
+    this.formValue = parsedAddress;
   }
 
   async created () {}

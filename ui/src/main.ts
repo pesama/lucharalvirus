@@ -3,6 +3,7 @@ import Element from 'element-ui'
 import VueI18n from 'vue-i18n'
 import VuePlaceAutocomplete from 'vue-place-autocomplete'
 import 'element-theme-chalk';
+import * as VueGoogleMaps from 'vue2-google-maps';
 
 
 import Amplify, * as AmplifyModules from 'aws-amplify'
@@ -16,8 +17,16 @@ Vue.use(AmplifyPlugin, AmplifyModules)
 Vue.use(VueI18n)
 Vue.use(VuePlaceAutocomplete);
 
+const configService = ConfigurationService.getInstance()
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: configService.get('GMAPS_API_KEY')
+  }
+});
+
 import App from './App.vue'
 import router from './router'
+import ConfigurationService from './services/ConfigurationService';
 
 Vue.config.productionTip = false
 

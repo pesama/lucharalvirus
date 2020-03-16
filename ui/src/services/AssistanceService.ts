@@ -2,6 +2,7 @@ import ConfigurationService from './ConfigurationService';
 import Amplify from 'aws-amplify';
 import { DynamoDB } from 'aws-sdk';
 import moment from 'moment';
+import { v4 as uuid } from 'uuid';
 
 export default class AssistanceService {
   private static instance: AssistanceService;
@@ -65,7 +66,8 @@ export default class AssistanceService {
           CreationDate: moment().format('YYYY-MM-DD HH:mm:ss'),
           Address,
           Request,
-          Status: 'requested'
+          Status: 'requested',
+          UniqueKey: uuid()
         }
       }).promise();
       return true;
