@@ -19,6 +19,7 @@
     "core-js": "^3.4.4",
     "element-theme-chalk": "^2.13.0",
     "element-ui": "^2.13.0",
+    "geolib": "^3.2.1",
     "numeral": "^2.0.6",
     "randomcolor": "^0.5.4",
     "reconnecting-websocket": "^4.2.0",

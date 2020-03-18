@@ -6,17 +6,16 @@
     </div>
     <div class="content tools">
       <el-row :gutter="20">
-        <el-col :xs="24" :sm="12" :md="8">
+        <!-- <el-col :xs="24" :sm="12" :md="8">
           <div class="affected-tracking">
             <h2 v-html="$t('home.infected.title')"></h2>
             <p v-html="$t('home.infected.description')"></p>
-            <!-- <infection-control-form /> -->
             <el-button type="warning" @click="startAffectedPersonaRegistration()">
               {{ $t('home.infected.register') }}
             </el-button>
           </div>
-        </el-col>
-        <el-col :xs="24" :sm="12" :md="8">
+        </el-col> -->
+        <el-col :xs="24" :sm="12" :md="12">
           <div class="risk-assistance">
             <h2 v-html="$t('home.assistance.title')"></h2>
             <p v-html="$t('home.assistance.description')"></p>
@@ -28,16 +27,19 @@
             </el-button>
           </div>
         </el-col>
-        <el-col :xs="24" :sm="12" :md="8">
+        <el-col :xs="24" :sm="12" :md="12">
           <div class="medical-assistance">
             <h2 v-html="$t('home.medical.title')" />
             <p v-html="$t('home.medical.description')" />
-            <el-button type="primary" @click="startPatientPersonaRegistration()">
+            <div class="soon" style="text-align: center">
+              Pronto activaremos esta funcionalidad
+            </div>
+            <!-- <el-button type="primary" @click="startPatientPersonaRegistration()">
               {{ $t('home.medical.actions.registerPatient') }}
             </el-button>
             <el-button type="normal" @click="startDoctorPersonaRegistration()">
               {{ $t('home.medical.actions.registerDoctor') }}
-            </el-button>
+            </el-button> -->
           </div>
         </el-col>
         <!-- <el-col :xs="24" :sm="12" :md="8">

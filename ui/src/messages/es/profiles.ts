@@ -23,7 +23,10 @@ export default {
         description: 'Si necesitas que te ayudemos con la compra, con el paseo de animales, o alguna otra cosa, indícanos cómo podemos ayudarte, y pulsa el botón. Intentaremos que un voluntario te ayude enseguida.',
         awaitingTitle: 'Tienes una petición pendiente',
         data: {
-          requestSummary: 'Tu petición'
+          requestSummary: 'Tu petición',
+          volunteerName: 'Te va a ayudar',
+          allDone: 'Todo listo?',
+          finishRequest: 'Cerrar petición'
         },
         form: {
           submit: 'Enviar petición',

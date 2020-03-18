@@ -3,16 +3,21 @@
     v-loading="registrationConfirmed"
     :element-loading-text="$t('registration.loadingText')">
     <el-row :gutter="20">
-      <el-col :xs="12" :md="12">
-        <h1 v-html="$t(`registration.${role}.title`)" />
-        <p v-html="$t(`registration.${role}.description`)" />
+      <el-col :xs="24" :md="12" :lg="8">
+        <h1 v-html="$t(`registration.title`)" />
+        <p v-html="$t(`registration.description`)" />
         <p class="disclaimer" v-html="$t('registration.disclaimer')" />
       </el-col>
-      <el-col :xs="12" :md="12">
+      <el-col :xs="24" :md="12" :lg="6">
+        <h1 v-html="$t(`registration.donations.title`)" />
+        <p v-html="$t(`registration.donations.description`)" />
+      </el-col>
+      <el-col :xs="24" :lg="10">
         <div class="data">
           <amplify-authenticator v-bind:authConfig="authConfig"></amplify-authenticator>
         </div>
       </el-col>
+
     </el-row>
     
   </div>
@@ -69,8 +74,7 @@ export default class Registration extends Vue {
             key: 'phone_number',
             required: true,
             displayOrder: 3,
-            type: 'string',
-            signUpWith: true
+            type: 'string'
           },
           {
             label: this.$t('registration.fields.address.label'),
@@ -111,6 +115,13 @@ export default class Registration extends Vue {
       const btn = document.querySelector('a[data-test="sign-in-create-account-link"]');
       // @ts-ignore
       btn.click();
+
+      setTimeout(() => {
+        const selects = document.querySelectorAll('select[data-test="dial-code-select"]') as any;
+        Object.values(selects).forEach((s: any) => {
+          s.value = '34';
+        })
+      }, 200);
     }, 50);
   }
 }
@@ -136,9 +147,9 @@ export default class Registration extends Vue {
       box-shadow: none;
     }
 
-    .Section__sectionFooterSecondaryContent___3cjOa {
-      display: none;
-    }
+    // .Section__sectionFooterSecondaryContent___3cjOa {
+    //   display: none;
+    // }
   }
 
   // .el-row:not(.ready) {

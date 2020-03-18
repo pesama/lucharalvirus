@@ -50,6 +50,23 @@
               {{ assistanceRequests[0].Request }}
             </span>
           </div>
+          <div class="item" v-if="assistanceRequests[0].Status === 'routed'">
+            <label class="data-label" v-html="$t('profiles.risk.actions.help.data.volunteerName')" />
+            <span class="value">
+              {{ assistanceRequests[0].AssigneeName }}
+            </span>
+          </div>
+          <div class="item" v-if="assistanceRequests[0].Status === 'routed'">
+            <label class="data-label" v-html="$t('profiles.risk.actions.help.data.allDone')" />
+            <span class="value">
+              <el-button 
+              size="mini" 
+              type="success"
+              @click="finishRequest()">
+              {{ $t('profiles.risk.actions.help.data.finishRequest') }}
+            </el-button>
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -108,7 +125,18 @@ export default class MyProfile extends Vue {
         this.fwk.addAlert('error', this.$t('profiles.risk.actions.help.error.unknown') as string);
       }
     }
+  }
 
+  async finishRequest () {
+    if (confirm(this.$t('profiles.risk.actions.help.data.confirmFinishing') as string)) {
+      const feedback = prompt(this.$t('profiles.risk.actions.help.data.feedback') as string);
+      // const result = await this.assistance.finishRequest(this.assistanceRequests[0]);
+      // if (result) {
+
+      // } else {
+
+      // }
+    }
   }
 }
 </script>
@@ -128,6 +156,7 @@ export default class MyProfile extends Vue {
       display: flex;
       justify-content: flex-start;
       align-items: center;
+      margin: .5em 0;
 
       .data-label {
         width: 40%;

@@ -7,7 +7,7 @@
           <div class="subtitle" v-html="$t('dashboard.welcome.subtitle', { role: $t(`common.personas.${role}`) })" />
           <p class="description" v-html="$t(`dashboard.welcome.${role}`)" />
           <div v-if="role === 'volunteer'">
-            <volunteering-table />
+            <volunteering-table v-on:current-requests="updateAssistance" :profiles="profiles" />
           </div>
         </div>
       </el-col>
@@ -32,12 +32,11 @@
             <affected-sampling />
           </div>
           <div class="control" v-else-if="role === 'volunteer'">
-            <volunteers-dashboard />
+            <volunteers-dashboard :profiles="profiles" :requests="assistanceRequests" />
           </div> 
           <div class="data" v-else>
             <my-profile :profiles="profiles" :user="user" />
           </div>
-          
         </div>
       </el-col>
     </el-row>
@@ -94,6 +93,8 @@ export default class Dashboard extends Vue {
   public newProfile: UiProfile | null = null;
   public profiles: Profile[] = [];
   public user: any = null;
+
+  public assistanceRequests: any[] = [];
 
   get role (): AppPersona {
     return this.$route.params.persona as AppPersona;
@@ -184,12 +185,18 @@ export default class Dashboard extends Vue {
         if (result) {
           this.fwkService.addAlert('success', this.$t('registration.success') as string);
           const profiles = await this.profileService.getProfile();
-          this.profiles = this.profiles.concat(profiles);
+          this.profiles = profiles;
+
         } else {
           this.fwkService.addAlert('error', this.$t('registration.error') as string);
         }
+        this.creationTimeout = null;
       }, 100);
     })
+  }
+
+  updateAssistance (items: any[]) {
+    this.assistanceRequests = items;
   }
 }
 </script>

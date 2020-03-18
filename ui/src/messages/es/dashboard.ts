@@ -13,7 +13,29 @@ export default {
   tools: {
     volunteer: {
       title: 'Peticiones de asistencia',
-      description: 'Aquí verás las peticiones de asistencia de tu zona, ordenadas por la distancia que hay entre tu domicilio y el de la persona que ha solicitado ayuda. Elige lo que quieres hacer y pulsa el botón contacto a la derecha de esa petición. Te enviaremos un sms con su teléfono para que puedas contactar con él.'
+      description: 'Aquí verás las peticiones de asistencia de tu zona, ordenadas por la distancia que hay entre tu domicilio y el de la persona que ha solicitado ayuda. Elige lo que quieres hacer y pulsa el botón contacto a la derecha de esa petición. Te enviaremos un sms con su teléfono para que puedas contactar con él.',
+      requests: {
+        status: {
+          label: 'Estado'
+        },
+        age: {
+          label: 'Creado'
+        },
+        description: {
+          label: 'Descripción'
+        },
+        distance: {
+          label: 'Distancia'
+        },
+        actions: {
+          label: 'Acciones',
+          assign: {
+            label: 'Asignarme',
+            success: 'Te hemos asignado la tarea. Recibirás un mensaje con información.',
+            failed: 'Algo ha ido mal cuando intentábamos asignarte la tarea.'
+          }
+        }
+      }
     }
   }
 }

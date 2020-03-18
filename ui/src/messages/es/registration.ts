@@ -1,5 +1,22 @@
 export default {
-  disclaimer: 'Por favor, utiliza esta herramienta de forma responsable. En estos tiempos de crisis cada minuto cuenta, y debemos minimizar el tiempo que malgastemos. Cada registro, comentario, o acción falsa nos lleva tiempo y esfuerzo, y pone en potencial riesgo a los demás. Si no te tomas en serio esta herramienta podremos tomar acciones legales.',
+  title: 'Bienvenido a LucharAlVirus.com!',
+  description: `
+    Hemos creado esta página para facilitar los tantos actos voluntarios que se están haciendo para ayudar a las personas con más riesgo a mantenerse a salvo.
+
+    Para intentar ayudaros, ponemos a vuestra disposición esta plataforma, en la que tanto personas en grupos de riesgo como voluntarios podéis registraros, y pedir u ofrecer ayuda en vuestra ciudad. Recopilamos las solicitudes de ayuda de la gente y se las enviamos a los voluntarios que se encuentren cerca. Cuando ellos aceptan, os ponemos en contacto. Esperamos que así podamos juntos proteger a la gente con más riesgo.
+
+    <h3>Accesible a todo el mundo</h3>
+    Muchas personas en condiciones de riesgo no tienen acceso a la tecnología. Esto hace que las muchísimas ofertas de ayuda que vemos en las redes sociales no lleguen a todos los destinos, y que haya gente que no reciba la ayuda que necesita. Por esto hemos hecho accesible, con la misma funcionalidad que en la web, <b>un servicio para pedir ayuda por teléfono</b>. Si conoces a alguien que pueda necesitar ayuda, y que no tenga un acceso a internet, dile que puede llamar al número:
+
+    <pre>{phone}</pre>
+
+    Un sistema te preguntará ciertos datos para registrarte y apuntar tu dirección, y te permitirá pedir ayuda. A partir de ahí, todo funcionará de manera normal.
+  `,
+  disclaimer: 'Para conseguir que esta herramienta funcione de manera correcta, facilitaremos tu número de teléfono a los voluntarios que acepten tus solicitudes de ayuda. Ellos te llamarán para coordinar contigo lo que necesites.',
+  donations: {
+    title: 'Ayuda a mantener esta iniciativa',
+    description: 'Para que esta plataforma funcione para todos, la hemos alojado en la nube. Estamos intentando contactar con nuestros proveedores para que no nos cobren este servicio, pero de no ser así, no podremos mantenerla activa sin tu ayuda. Por favor, dona a esta iniciativa siguiendo este link: {link}. Muchas gracias por tu ayuda! <b>Nota</b> Todo el dinero que nos sobre será donado a quien más lo necesite en estos momentos.'
+  },
   loadingText: 'Tu cuenta está lista! Te estamos dirigiendo a la aplicación',
   success: 'Hemos guardado los datos correctamente',
   error: 'Ha habido un error cuando intentábamos guardar los datos.',

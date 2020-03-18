@@ -15,6 +15,7 @@ export user_pool_client_id=$(echo $stack_description | jq -r '.Stacks[0].Outputs
 export identity_pool_id=$(echo $stack_description | jq -r '.Stacks[0].Outputs[] | select(.OutputKey == "AuthIdentityPoolId") | .OutputValue')
 export profiles_table_name=$(echo $stack_description | jq -r '.Stacks[0].Outputs[] | select(.OutputKey == "ProfilesTableName") | .OutputValue')
 export assistance_table_name=$(echo $stack_description | jq -r '.Stacks[0].Outputs[] | select(.OutputKey == "AssistanceTableName") | .OutputValue')
+export assistance_assignments_table_name=$(echo $stack_description | jq -r '.Stacks[0].Outputs[] | select(.OutputKey == "AssistanceAssignmentsTableName") | .OutputValue')
 export sampling_table_name=$(echo $stack_description | jq -r '.Stacks[0].Outputs[] | select(.OutputKey == "SamplingTableName") | .OutputValue')
 export samples_table_name=$(echo $stack_description | jq -r '.Stacks[0].Outputs[] | select(.OutputKey == "AssetsTableName") | .OutputValue')
 export website_bucket_name=$(echo $stack_description | jq -r '.Stacks[0].Outputs[] | select(.OutputKey == "WebUIBucketName") | .OutputValue')
