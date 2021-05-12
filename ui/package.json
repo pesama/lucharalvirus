@@ -15,7 +15,7 @@
     "aws-api-gateway-client": "^0.3.3",
     "binance-api-node": "^0.9.13",
     "blockly": "^3.20200123.1",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "core-js": "^3.4.4",
     "element-theme-chalk": "^2.13.0",
     "element-ui": "^2.13.0",
